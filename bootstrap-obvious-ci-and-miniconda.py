@@ -13,11 +13,7 @@ import os
 import platform
 import subprocess
 import sys
-
-try:
-    from urllib.request import urlretrieve
-except ImportError:
-    from urllib import urlretrieve
+import requests
 
 MINICONDA_URL_TEMPLATE = ('https://repo.continuum.io/miniconda/Miniconda{major_py_version}-'
                           '{miniconda_version}-{OS}-{arch}.{ext}')
@@ -32,7 +28,7 @@ def miniconda_url(target_system, target_arch, major_py_version, miniconda_versio
         template_values['arch'] = "x86_64"
     else:
         raise ValueError('Unexpected target arch.')
-    
+
     system_to_miniconda_os = {'Linux': 'Linux',
                               'Darwin': 'MacOSX',
                               'Windows': 'Windows'}
@@ -47,7 +43,7 @@ def miniconda_url(target_system, target_arch, major_py_version, miniconda_versio
     if major_py_version not in ['2', '3']:
         raise ValueError('Unexpected major Python version {!r}.'.format(major_py_version))
     template_values['major_py_version'] = major_py_version
-    
+
     return MINICONDA_URL_TEMPLATE.format(**template_values)
 
 
@@ -61,14 +57,15 @@ def main(target_dir, target_arch, major_py_version, miniconda_version='latest', 
     elif system in ['Windows']:
         cmd = ['powershell', 'Start-Process', '-FilePath', basename, '-ArgumentList',
                '/S,/D=' + target_dir,
-	       '-Wait', ]#'-Passthru']
+               '-Wait', ]#'-Passthru']
         bin_dir = 'scripts'
     else:
         raise ValueError('Unsupported operating system.')
-    
+
     if not os.path.exists(basename):
         print('Downloading from {}'.format(URL))
-        urlretrieve(URL, basename)
+        r = requests.get(URL, allow_redirects=True)
+        open(basename, 'wb').write(r.content)
     else:
         print('Using cached version of {}'.format(URL))
 
@@ -76,7 +73,7 @@ def main(target_dir, target_arch, major_py_version, miniconda_version='latest', 
     if os.path.exists(target_dir):
         raise IOError('Installation directory already exists')
     subprocess.check_call(cmd)
-    
+
     if not os.path.isdir(target_dir):
         raise RuntimeError('Failed to install miniconda :(')
 
