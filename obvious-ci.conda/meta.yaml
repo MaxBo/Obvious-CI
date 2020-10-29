@@ -15,7 +15,6 @@ requirements:
     run:
         - python
         - setuptools
-        - requests
         - anaconda-client
         - conda
         - conda-build
