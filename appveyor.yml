@@ -11,8 +11,8 @@ environment:
     secure: mhuiPtFbEu6DHu8hvGyoIKAt3TAIKtYSeqg5QPLs4hCxDZ3gUAAP+wIW15wQE3hB
 
   matrix:
-    - TARGET_ARCH: "x64"
-      CONDA_PY: "39"
+#    - TARGET_ARCH: "x64"
+#      CONDA_PY: "39"
     - TARGET_ARCH: "x86"
       CONDA_PY: "39"
     - TARGET_ARCH: "x64"
@@ -54,7 +54,7 @@ install:
 build: off
 
 test_script:
-    - "%CMD_IN_ENV% conda config --set channel_priority false"
+#    - "%CMD_IN_ENV% conda config --set channel_priority false"
     - "%CMD_IN_ENV% conda build --debug obvious-ci.conda"
 
 on_success:
