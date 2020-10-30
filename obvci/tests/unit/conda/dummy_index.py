@@ -1,5 +1,5 @@
 import collections
-from conda.base.context import subdir
+from conda.base.context import context
 
 _DummyPackage = collections.namedtuple('_DummyPackage',
                                        ['pkg_name', 'build_deps', 'run_deps'])
@@ -38,6 +38,6 @@ class DummyIndex(dict):
         else:
             build_string = build_number
         pkg_info = dict(name=name, version=version, build_number=build_number,
-                        build=build_string, subdir=subdir,
+                        build=build_string, subdir=context.subdir,
                         depends=tuple(depends), **extra_items)
         self['{}-{}-{}.tar.bz2'.format(name, version, build_string)] = pkg_info

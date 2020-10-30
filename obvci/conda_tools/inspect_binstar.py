@@ -1,4 +1,4 @@
-from conda.base.context import subdir
+from conda.base.context import context
 import binstar_client
 from conda_build.build import bldpkg_path
 
@@ -26,7 +26,7 @@ def distribution_exists_on_channel(binstar_cli, owner, metadata, channel='main')
     Note from @pelson: As far as I can see, there is no easy way to do this on binstar.
 
     """
-    fname = '{}/{}.tar.bz2'.format(subdir, metadata.dist())
+    fname = '{}/{}.tar.bz2'.format(context.subdir, metadata.dist())
     distributions_on_channel = [dist['basename'] for dist in
                                 binstar_cli.show_channel(owner=owner, channel=channel)['files']]
     return fname in distributions_on_channel
@@ -40,5 +40,5 @@ def add_distribution_to_channel(binstar_cli, owner, metadata, channel='main'):
     so if you have a foo-0.1-np18 and foo-0.1-np19 *both* will be added to the channel.
 
     """
-    package_fname = '{}/{}.tar.bz2'.format(subdir, metadata.dist())
+    package_fname = '{}/{}.tar.bz2'.format(context.subdir, metadata.dist())
     binstar_cli.add_channel(channel, owner, metadata.name(), metadata.version())#filename=package_fname)

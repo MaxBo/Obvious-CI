@@ -18,7 +18,7 @@ import binstar_client
 from conda.core.index import get_index
 from conda_build.metadata import MetaData
 from conda_build.build import bldpkg_path
-from conda.base.context import subdir
+from conda.base.context import context
 
 from . import order_deps
 from . import build
@@ -33,7 +33,7 @@ def package_built_name(package, root_dir):
 
 
 def distribution_exists(binstar_cli, owner, metadata):
-    fname = '{}/{}.tar.bz2'.format(subdir, metadata.dist())
+    fname = '{}/{}.tar.bz2'.format(context.subdir, metadata.dist())
     try:
         r = binstar_cli.distribution(owner, metadata.name(), metadata.version(),
                                      fname)
