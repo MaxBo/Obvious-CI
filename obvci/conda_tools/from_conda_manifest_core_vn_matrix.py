@@ -1,6 +1,5 @@
 # TODO: Pull this back together with conda_manifest.
 import os
-import sys
 from contextlib import contextmanager
 from collections import defaultdict
 
@@ -21,7 +20,7 @@ from conda.gateways.logging import StdStreamHandler
 
 class StdoutNewline(StdStreamHandler):
     def __init__(self):
-        return super(self, sys.stdout)
+        return super().__init__('stdout')
 
     def emit(self, record):
         record.msg += '\n'
