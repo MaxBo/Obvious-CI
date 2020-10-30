@@ -15,13 +15,13 @@ conda_stdoutlog = stdoutlog
 # TODO: Handle the amount of standard out that conda is producing.
 
 
-from conda.console import SysStdoutWriteHandler
+from conda.gateways.logging import StdStreamHandler
 
 
-class StdoutNewline(SysStdoutWriteHandler):
+class StdoutNewline(StdStreamHandler):
     def emit(self, record):
         record.msg += '\n'
-        SysStdoutWriteHandler.emit(self, record)
+        StdStreamHandler.emit(self, record)
 
 
 stdout = logging.getLogger('obvci.stdoutlog')
