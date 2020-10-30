@@ -79,7 +79,7 @@ def main(target_dir, target_arch, major_py_version, miniconda_version='latest', 
 
     if install_obvci:
         conda_path = os.path.join(target_dir, bin_dir, 'conda')
-        subprocess.check_call([conda_path, 'install', '--yes', '--quiet', '-c', 'pelson', 'obvious-ci'])
+        subprocess.check_call([conda_path, 'install', '--yes', '--quiet', '-c', 'MaxBo', 'obvious-ci'])
 
 
 if __name__ == '__main__':
