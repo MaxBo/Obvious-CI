@@ -1,5 +1,6 @@
 # TODO: Pull this back together with conda_manifest.
 import os
+import sys
 from contextlib import contextmanager
 from collections import defaultdict
 
@@ -25,7 +26,7 @@ class StdoutNewline(StdStreamHandler):
 
 
 stdout = logging.getLogger('obvci.stdoutlog')
-stdout.addHandler(StdoutNewline())
+stdout.addHandler(StdoutNewline(sys.stdout))
 stdout.setLevel(logging.WARNING)
 
 
