@@ -9,7 +9,7 @@ import conda_build.config
 # import conda_manifest.config
 
 import logging
-from conda.resolve import stdoutlog, dotlog
+from conda.resolve import stdoutlog
 
 conda_stdoutlog = stdoutlog
 # TODO: Handle the amount of standard out that conda is producing.
