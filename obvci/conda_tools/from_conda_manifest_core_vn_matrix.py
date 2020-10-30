@@ -20,13 +20,16 @@ from conda.gateways.logging import StdStreamHandler
 
 
 class StdoutNewline(StdStreamHandler):
+    def __init__(self):
+        return super(self, sys.stdout)
+
     def emit(self, record):
         record.msg += '\n'
         StdStreamHandler.emit(self, record)
 
 
 stdout = logging.getLogger('obvci.stdoutlog')
-stdout.addHandler(StdoutNewline(sys.stdout))
+stdout.addHandler(StdoutNewline())
 stdout.setLevel(logging.WARNING)
 
 
