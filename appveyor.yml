@@ -11,6 +11,7 @@ environment:
     secure: mhuiPtFbEu6DHu8hvGyoIKAt3TAIKtYSeqg5QPLs4hCxDZ3gUAAP+wIW15wQE3hB
 
   matrix:
+    - TARGET_ARCH: "x64"
       CONDA_PY: "39"
     - TARGET_ARCH: "x86"
       CONDA_PY: "39"
@@ -34,7 +35,6 @@ environment:
       CONDA_PY: "38"
     - TARGET_ARCH: "x86"
       CONDA_PY: "38"
-    - TARGET_ARCH: "x64"
 
 
 # We always use a 64-bit machine, but can build x86 distributions
