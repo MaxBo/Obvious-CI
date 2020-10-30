@@ -54,7 +54,8 @@ install:
 build: off
 
 test_script:
-    - "%CMD_IN_ENV% conda config --set channel_priority false;conda build --debug obvious-ci.conda"
+    - "%CMD_IN_ENV% conda config --set channel_priority false"
+    - "%CMD_IN_ENV% conda build --debug obvious-ci.conda"
 
 on_success:
     - "conda build obvious-ci.conda --output > obvci_fname.txt"
