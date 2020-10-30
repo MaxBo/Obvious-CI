@@ -20,7 +20,7 @@ from conda.gateways.logging import StdStreamHandler
 
 class StdoutNewline(StdStreamHandler):
     def __init__(self):
-        return super().__init__('stdout')
+        return super(StdoutNewline, self).__init__('stdout')
 
     def emit(self, record):
         record.msg += '\n'
