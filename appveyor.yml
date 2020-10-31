@@ -3,7 +3,7 @@ branches:
     - master
 
 environment:
-  MINICONDA_VERSION: "3.5.5"
+  #MINICONDA_VERSION: "3.5.5"
   CONDA_INSTALL_LOCN: "C:\\conda"
   CMD_IN_ENV: "cmd /E:ON /V:ON /C scripts\\obvci_appveyor_python_build_env.cmd"
 
@@ -54,8 +54,7 @@ install:
 build: off
 
 test_script:
-#    - "%CMD_IN_ENV% conda config --set channel_priority false"
-    - "%CMD_IN_ENV% conda build --debug obvious-ci.conda"
+    - "%CMD_IN_ENV% conda build obvious-ci.conda"
 
 on_success:
     - "conda build obvious-ci.conda --output > obvci_fname.txt"
