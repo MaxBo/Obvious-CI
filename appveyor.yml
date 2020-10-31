@@ -16,6 +16,14 @@ environment:
 #    - TARGET_ARCH: "x86"
 #      CONDA_PY: "39"
     - TARGET_ARCH: "x64"
+      CONDA_PY: "37"
+    - TARGET_ARCH: "x86"
+      CONDA_PY: "37"
+    - TARGET_ARCH: "x64"
+      CONDA_PY: "38"
+    - TARGET_ARCH: "x86"
+      CONDA_PY: "38"
+    - TARGET_ARCH: "x64"
       CONDA_PY: "27"
     - TARGET_ARCH: "x86"
       CONDA_PY: "27"
@@ -27,14 +35,6 @@ environment:
       CONDA_PY: "36"
     - TARGET_ARCH: "x86"
       CONDA_PY: "36"
-    - TARGET_ARCH: "x64"
-      CONDA_PY: "37"
-    - TARGET_ARCH: "x86"
-      CONDA_PY: "37"
-    - TARGET_ARCH: "x64"
-      CONDA_PY: "38"
-    - TARGET_ARCH: "x86"
-      CONDA_PY: "38"
 
 
 # We always use a 64-bit machine, but can build x86 distributions
@@ -63,5 +63,5 @@ on_success:
     - "python -c \"import os; tag = os.environ.get('APPVEYOR_REPO_TAG', 'false'); is_master = os.environ.get('APPVEYOR_REPO_BRANCH', None) == 'master'; is_pr = os.environ.get('APPVEYOR_PULL_REQUEST_NUMBER', ''); print(tag not in ['false', ''] or (is_master and not is_pr));\" > is_tag_or_master.txt"
     - "set /p TAG_OR_MASTER= < is_tag_or_master.txt"
     - "ECHO '%TAG_OR_MASTER%'"
-    - "if '%TAG_OR_MASTER%' == 'True' (anaconda -t %ANACONDA_TOKEN% upload %FNAME% -u MaxBo -c development --force)"
+    - "if '%TAG_OR_MASTER%' == 'True' (anaconda -t %ANACONDA_TOKEN% upload %FNAME% -u MaxBo --force)"
 
